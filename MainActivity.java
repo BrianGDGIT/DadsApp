@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
     int imageLocation = 0;
+    boolean firstPlay = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,39 @@ public class MainActivity extends AppCompatActivity {
 
     //Fathers Day Button
     public void sendFathersDayMessage(View v){
-        MediaPlayer hfdayMP = MediaPlayer.create(this, R.raw.hfday);
-        hfdayMP.start();
+
+        if(firstPlay == true){
+            MediaPlayer hfdayMP = MediaPlayer.create(this, R.raw.hfday);
+            hfdayMP.start();
+            firstPlay = false;
+        }else {
+            Random rSound = new Random();
+            int rNumber;
+
+            rNumber = rSound.nextInt(3);
+
+            switch(rNumber){
+                case 0:
+                    MediaPlayer s1MP = MediaPlayer.create(this, R.raw.s1  );
+                    s1MP.start();
+                    break;
+
+                case 1:
+                    MediaPlayer s2MP = MediaPlayer.create(this, R.raw.s2 );
+                    s2MP.start();
+                    break;
+
+                case 2:
+                    MediaPlayer s3MP = MediaPlayer.create(this, R.raw.s3);
+                    s3MP.start();
+                    break;
+
+                default:
+                    MediaPlayer hfdayMP = MediaPlayer.create(this, R.raw.hfday);
+                    hfdayMP.start();
+                    break;
+            }
+        }
+
     }
 }
